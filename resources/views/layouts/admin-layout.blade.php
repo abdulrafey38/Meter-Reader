@@ -10,7 +10,7 @@
     <style>
 
     body {
-       
+        background-image: url('https://www.desktopbackground.org/download/1024x768/2014/03/31/739647_minimalistic-multicolor-gaussian-blur-simple-backgrounds-white_1080x1920_h.jpg');
          /* Full height */
         height: 100%;
 
