@@ -21,4 +21,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/home/unit', 'UnitController');
+
+
+
+//======================================================================================
+//Route Group
+Route::middleware(['admin'])->group(function () {
+
+    Route::resource('/home/unit', 'UnitController');//Unit Resource Route
+});
+
+//======================================================================================

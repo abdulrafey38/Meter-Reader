@@ -1,69 +1,70 @@
 @extends('layouts.admin-layout')
+{{-- CSS Starts --}}
 <head>
     <style>
 
-.user-dashboard .sales h2 {
+        .user-dashboard .sales h2 {
         color: #8492af;
         float: left;
         font-size: 14px;
         font-weight: 600;
         margin: 0;
         padding: 13px 0 0;
-}
-    .user-dashboard .btn.btn-secondary.btn-lg.dropdown-toggle > span {
+    }
+        .user-dashboard .btn.btn-secondary.btn-lg.dropdown-toggle > span {
         font-size: 11px;
-}
-    .user-dashboard .sales button {
+    }
+        .user-dashboard .sales button {
         font-size: 11px;
         padding-right: 23px;
-}
-    .user-dashboard .sales h2 {
-    font-size: 12px;
-}
-.gutter{
-    padding: 0;
-}
-}
+    }
+        .user-dashboard .sales h2 {
+        font-size: 12px;
+    }
+    .gutter{
+        padding: 0;
+    }
+    }
 
-@media only screen and (max-device-width: 992px) {
-    header .header-top li {
+    @media only screen and (max-device-width: 992px) {
+        header .header-top li {
         padding-left: 20px !important;
         padding-right: 0;
-}
-    header .logo img {
+    }
+        header .logo img {
         max-width: 125px !important;
-}
+    }
 
-}
+    }
 
-@media only screen and (min-device-width: 767px) and (max-device-width: 998px){
-      .user-dashboard .header-top {
-        padding-top: 5px;
-}
-    .user-dashboard .header-rightside {
+    @media only screen and (min-device-width: 767px) and (max-device-width: 998px){
+            .user-dashboard .header-top {
+            padding-top: 5px;
+    }
+        .user-dashboard .header-rightside {
         display: inline-block;
         float: left;
         width: 100%;
-}
-    .user-dashboard .header-rightside .header-top img {
+    }
+        .user-dashboard .header-rightside .header-top img {
         max-width: 41px !important;
-}
-    .user-dashboard .sales button {
-    font-size: 10px;
-}
-    .user-dashboard .btn.btn-secondary.btn-lg.dropdown-toggle > span {
-    font-size: 12px;
-}
-    .user-dashboard .sales h2 {
-    font-size: 15px;
-}
-}
+    }
+        .user-dashboard .sales button {
+        font-size: 10px;
+    }
+        .user-dashboard .btn.btn-secondary.btn-lg.dropdown-toggle > span {
+        font-size: 12px;
+    }
+        .user-dashboard .sales h2 {
+        font-size: 15px;
+    }
+    }
 
-.user-dashboard {
+    .user-dashboard {
     padding: 0 20px;
-}
+    }
 
-.user-dashboard h1 {
+    .user-dashboard h1 {
     color: #0e1a35;
     font-size: 30px;
     font-weight: 500;
@@ -144,48 +145,53 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
 </head>
+{{-- Css Ends --}}
+
+@section('content') {{-- Section Content --}}
+<h1>Update UNITS</h1>
 
 
-@section('content')
-<h1>ADD UNITS</h1>
+{{--====================================================================================== --}}
+    {{-- Notifications Flashes --}}
+    @if(Session::has('deleted_user'))
+
+    <div class="alert alert-danger">
+        <p >{{ session('deleted_user') }}</p>
+    </div>
+    @elseif(Session::has('create_user'))
+
+    <div class="alert alert-success">
+        <p >{{ session('create_user') }}</p>
+    </div>
+    @elseif(Session::has('update_user'))
+
+    <div class="alert alert-success">
+        <p >{{ session('update_user') }}</p>
+    </div>
+    @endif
+{{--====================================================================================== --}}
+
+{{-- Form  Starts --}}
+    {!! Form::model($unit,['method'=>'PATCH','files'=>'true','action'=>['UnitController@update',$unit->id]]) !!}
 
 
-@if(Session::has('deleted_user'))
+    <div class="form-group">
+        {!! Form::label('date','Date:') !!}
+        {!! Form::date('date', null , ['class' => 'form-control alert-danger','disabled'=>'true']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('unit','Unit:') !!}
+        {!! Form::text('unit', null , ['class' => 'form-control alert-success']) !!}
+    </div>
 
-<div class="alert alert-danger">
-    <p >{{ session('deleted_user') }}</p>
-</div>
-@elseif(Session::has('create_user'))
+    <div class="form-group">
+        {!! Form::submit('Update Units', ['class'=>'btn btn-primary']) !!}
+    </div>
+    {!! Form::close() !!}
+{{-- Form Ends --}}
 
-<div class="alert alert-success">
-    <p >{{ session('create_user') }}</p>
-</div>
-@elseif(Session::has('update_user'))
-
-<div class="alert alert-success">
-    <p >{{ session('update_user') }}</p>
-</div>
-
-@endif
-
-{!! Form::model($unit,['method'=>'PATCH','files'=>'true','action'=>['UnitController@update',$unit->id]]) !!}
-
-
-<div class="form-group">
-    {!! Form::label('date','Date:') !!}
-    {!! Form::date('date', null , ['class' => 'form-control alert-danger']) !!}
-</div>
-<div class="form-group">
-    {!! Form::label('unit','Unit:') !!}
-    {!! Form::text('unit', null , ['class' => 'form-control alert-success']) !!}
-</div>
-
-<div class="form-group">
-    {!! Form::submit('Update Units', ['class'=>'btn btn-primary']) !!}
-</div>
-{!! Form::close() !!}
-
-    @if(count($errors)>0)
+{{--====================================================================================== --}}
+    @if(count($errors)>0) {{-- Error Notifications --}}
         <div class="alert alert-danger" role="atert">
             <ul>
                 @foreach ($errors->all() as $error)
@@ -197,4 +203,5 @@
         </div>
 
     @endif
+{{--====================================================================================== --}}
 @endsection

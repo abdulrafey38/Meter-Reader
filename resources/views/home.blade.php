@@ -1,5 +1,7 @@
 
 @extends('layouts.admin-layout')
+{{--====================================================================================== --}}
+{{-- CSS Starts --}}
 <head>
     <style>
         body{
@@ -76,49 +78,69 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
 </head>
-
-
+{{-- CSS Ends --}}
+{{--====================================================================================== --}}
 @section('content')
     <br><br>
+{{--====================================================================================== --}}
+    {{-- Notifications Flashes --}}
+    @if(Session::has('deleted_user'))
+
+    <div class="alert alert-danger">
+        <p >{{ session('deleted_user') }}</p>
+    </div>
+    @elseif(Session::has('create_user'))
+
+    <div class="alert alert-success">
+        <p >{{ session('create_user') }}</p>
+    </div>
+    @elseif(Session::has('update_user'))
+
+    <div class="alert alert-success">
+        <p >{{ session('update_user') }}</p>
+    </div>
+    @endif
+{{--====================================================================================== --}}
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6 ">
-                <div class="card bg-c-pink order-card">
-                    <div class="card-block">
-                        <br>
-                        <h6 class="m-b-20">Units/Month</h6>
-                        <h2 class="text-right"><i class="fa fa-bolt f-left"></i><span>33</span></h2>
-                        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 ">{{-- Month wise Units Charts --}}
+                    <div class="card bg-c-pink order-card">
+                        <div class="card-block">
+                            <br>
+                            <h6 class="m-b-20">Units/Month</h6>
+                            <h2 class="text-right"><i class="fa fa-bolt f-left"></i><span>{{ $month }}</span></h2>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6"> {{-- Year wise Ubits Chart --}}
+                    <div class="card bg-c-brown order-card">
+                        <div class="card-block">
+                            <br>
+                            <h6 class="m-b-20">Units/Year</h6>
+                            <h2 class="text-right"><i class="fa fa-bolt f-left"></i><span>{{ $year }}</span></h2>
+                            <br>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="col-sm-6">
-                <div class="card bg-c-brown order-card">
-                    <div class="card-block">
-                        <br>
-                        <h6 class="m-b-20">Units/Year</h6>
-                        <h2 class="text-right"><i class="fa fa-bolt f-left"></i><span>444</span></h2>
-                        <br>
-                    </div>
-                </div>
+                <br><br>
+{{--====================================================================================== --}}
+            <div class="wrapper" align="center" > {{-- Line Graph Here --}}
+                <canvas id='c'></canvas>
+                <div class="label">Units <strong>Month Wise</strong></div>
             </div>
-
         </div>
-        <br><br>
 
-        <div class="wrapper" align="center" >
-            <canvas id='c'></canvas>
-            <div class="label">Units <strong>Month Wise</strong></div>
-        </div>
-    </div>
-
-
-
+{{-- Main Page Ends --}}
+{{--====================================================================================== --}}
 @endsection
 
+{{-- Javascript for the line graphs here --}}
+{{--====================================================================================== --}}
 @section('script')
 
     <script>
@@ -142,18 +164,18 @@
         grd.addColorStop(1, "hsla(167,72%,60%,0.09)");
 
         var oData = {
-            "Jan": 0,
-            "Feb": 46,
-            "Mar": 6,
-            "Apr": 4,
-            "May": 9,
-            "Jun": 89,
-            "Jul": 54,
-            "Aug": 3,
-            "Sep": 23,
-            "Oct": 65,
-            "Nov": 90,
-            "Dec": 67
+            "Jan": {{ $jan }},
+            "Feb": {{ $feb }},
+            "Mar": {{ $mar }},
+            "Apr": {{ $apr }},
+            "May": {{ $may }},
+            "Jun": {{ $jun }},
+            "Jul": {{ $jul }},
+            "Aug": {{ $aug }},
+            "Sep": {{ $sep }},
+            "Oct": {{ $oct }},
+            "Nov": {{ $nov }},
+            "Dec": {{ $dec }}
         };
 
         var valuesRy = [];
@@ -418,5 +440,7 @@
             }
         }
     </script>
+{{-- JS ends for the line graph --}}
+{{--====================================================================================== --}}
 @endsection
 

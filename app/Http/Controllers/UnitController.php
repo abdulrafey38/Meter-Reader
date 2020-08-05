@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Unit;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UnitRequest;
+use App\Http\Requests\UnitUpdateRequest;
 
 class UnitController extends Controller
 {
@@ -34,11 +36,11 @@ class UnitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UnitRequest $request)
     {
         Unit::create($request->all());
         \Session::flash('create_user','The Units has been added successfully!!');
-        return \redirect('/home/unit');
+        return \redirect('/home');
     }
 
     /**
@@ -71,12 +73,12 @@ class UnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UnitUpdateRequest $request, $id)
     {
             $unit = Unit::find($id);
             $unit->update($request->all());
-            \Session::flash('update_user','Updated Successfully!!');
-            return redirect('/home/unit');
+            \Session::flash('update_user','Updated Successfully!!');//Flashes Messages
+            return redirect('/home');
     }
 
     /**
@@ -90,7 +92,7 @@ class UnitController extends Controller
 
         $unit = Unit::find($id);
         $unit->delete();
-        \Session::flash('deleted_user','Deleted successfully!!');
-        return redirect('/home/unit');
+        \Session::flash('deleted_user','Deleted successfully!!');//Flashes Messages
+        return redirect('/home');
     }
 }

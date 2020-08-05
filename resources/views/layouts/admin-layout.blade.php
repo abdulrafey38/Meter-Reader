@@ -136,11 +136,11 @@
                 <a  class="text-white col-sm-4"><i class="fa fa-user"></i>&nbsp;&nbsp;&nbsp;Admin</a>
             </div><!--profile card ends-->
             <ul class="nav-news-feed">
-                <li><i class="fa fa-home"></i><div><a href="{{url('/home')}}">Dashboard</a></div></li>
+                <li><i class="fa fa-home"></i><div><a href="{{route('home')}}">Dashboard</a></div></li>
                     <li><i class="fa fa-home"></i><div><a href="{{route('unit.create')}}">Add Reading</a></div></li>
                     <li><i class="fa fa-home"></i><div><a href="{{route('unit.index')}}">View Reading</a></div></li>
 
-                    <li><i class = "fa fa-home"></i><a href="{{ route('logout') }}"
+                    <li><i class = "fa fa-home"></i><a href=""
                         onclick="event.preventDefault();
                                       document.getElementById('logout-form').submit();">
                          {{ __('Logout') }}

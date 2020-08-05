@@ -1,76 +1,78 @@
 @extends('layouts.admin-layout')
 
+{{--====================================================================================== --}}
+{{-- Css Starts --}}
 <head>
     <style>
 
-.user-dashboard .sales h2 {
+    .user-dashboard .sales h2 {
         color: #8492af;
         float: left;
         font-size: 14px;
         font-weight: 600;
         margin: 0;
         padding: 13px 0 0;
-}
-    .user-dashboard .btn.btn-secondary.btn-lg.dropdown-toggle > span {
+    }
+        .user-dashboard .btn.btn-secondary.btn-lg.dropdown-toggle > span {
         font-size: 11px;
-}
-    .user-dashboard .sales button {
+    }
+        .user-dashboard .sales button {
         font-size: 11px;
         padding-right: 23px;
-}
-    .user-dashboard .sales h2 {
-    font-size: 12px;
-}
-.gutter{
-    padding: 0;
-}
-}
+    }
+        .user-dashboard .sales h2 {
+        font-size: 12px;
+    }
+        .gutter{
+        padding: 0;
+        }
+    }
 
-@media only screen and (max-device-width: 992px) {
+    @media only screen and (max-device-width: 992px) {
     header .header-top li {
         padding-left: 20px !important;
         padding-right: 0;
-}
-    header .logo img {
+    }
+        header .logo img {
         max-width: 125px !important;
-}
+    }
 
-}
+    }
 
-@media only screen and (min-device-width: 767px) and (max-device-width: 998px){
+    @media only screen and (min-device-width: 767px) and (max-device-width: 998px){
       .user-dashboard .header-top {
         padding-top: 5px;
-}
+    }
     .user-dashboard .header-rightside {
         display: inline-block;
         float: left;
         width: 100%;
-}
+    }
     .user-dashboard .header-rightside .header-top img {
         max-width: 41px !important;
-}
+    }
     .user-dashboard .sales button {
     font-size: 10px;
-}
+    }
     .user-dashboard .btn.btn-secondary.btn-lg.dropdown-toggle > span {
     font-size: 12px;
-}
+    }
     .user-dashboard .sales h2 {
     font-size: 15px;
-}
-}
+    }
+    }
 
-.user-dashboard {
+    .user-dashboard {
     padding: 0 20px;
-}
+    }
 
-.user-dashboard h1 {
+    .user-dashboard h1 {
     color: #0e1a35;
     font-size: 30px;
     font-weight: 500;
     margin: 0;
     padding: 21px 0;
-}
+    }
         body{
             margin-top:20px;
             background:#FAFAFA;
@@ -146,60 +148,67 @@
 
 </head>
 
+{{-- CSS Ends --}}
+{{--====================================================================================== --}}
+
 @section('content')
 
 <h1>Units</h1>
 
-@if(Session::has('deleted_user'))
+{{--====================================================================================== --}}
+    {{-- Notifications Flashes --}}
+    @if(Session::has('deleted_user'))
 
-<div class="alert alert-danger">
-    <p >{{ session('deleted_user') }}</p>
-</div>
-@elseif(Session::has('create_user'))
+    <div class="alert alert-danger">
+        <p >{{ session('deleted_user') }}</p>
+    </div>
+    @elseif(Session::has('create_user'))
 
-<div class="alert alert-success">
-    <p >{{ session('create_user') }}</p>
-</div>
-@elseif(Session::has('update_user'))
+    <div class="alert alert-success">
+        <p >{{ session('create_user') }}</p>
+    </div>
+    @elseif(Session::has('update_user'))
 
-<div class="alert alert-success">
-    <p >{{ session('update_user') }}</p>
-</div>
+    <div class="alert alert-success">
+        <p >{{ session('update_user') }}</p>
+    </div>
+    @endif
+{{--====================================================================================== --}}
+{{-- Main Page --}}
+    <table class='table'>
+        <thead>
+        <tr>
+            <th>Id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>Units #&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>Last Updated&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if($unit)
 
-@endif
+            @foreach($unit as $unit)
 
-<table class='table'>
-    <thead>
-    <tr>
-        <th>Id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-        <th>Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-        <th>Units #&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-        <th>Last Updated&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-        <th>Action</th>
-    </tr>
-</thead>
-<tbody>
-    @if($unit)
-
-        @foreach($unit as $unit)
-
-    <tr>
-    <td>{{ $unit->id }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-    <td> <a href="{{ route('unit.edit',$unit->id) }}">{{ $unit->date }}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-    <td>{{ $unit->unit }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-    <td>{{ $unit->updated_at->diffForHumans() }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-    <td>
+        <tr>
+        <td>{{ $unit->id }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td> <a href="{{ route('unit.edit',$unit->id) }}">{{ $unit->date }}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>{{ $unit->unit }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>{{ $unit->updated_at->diffForHumans() }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>
             {!! Form::open(['method'=>'DELETE','action'=>['UnitController@destroy',$unit->id]]) !!}
 
             {!! Form::submit('Delete', ['class'=>'btn btn-danger']) !!}
 
             {!! Form::close() !!}
-    </td>
+        </td>
 
-    </tr>
-        @endforeach
-    @endif
-</tbody>
+        </tr>
+            @endforeach
+        @endif
+    </tbody>
 
-</table>
+    </table>
+{{-- page ends --}}
+{{--====================================================================================== --}}
 @endsection
