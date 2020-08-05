@@ -16,7 +16,7 @@ class UnitController extends Controller
      */
     public function index()
     {
-        $unit = Unit::orderBy('id', 'DESC')->get();;
+        $unit = Unit::orderBy('id', 'DESC')->get();
         return view('unit.index',compact('unit'));
     }
 
@@ -27,7 +27,8 @@ class UnitController extends Controller
      */
     public function create()
     {
-        return view('unit.add');
+        $unit = Unit::whereMonth('date',date('m'))->sum('unit');
+        return view('unit.add',compact('unit'));
     }
 
     /**
@@ -40,7 +41,7 @@ class UnitController extends Controller
     {
         Unit::create($request->all());
         \Session::flash('create_user','The Units has been added successfully!!');
-        return \redirect('/home');
+        return \redirect('/home/unit');
     }
 
     /**
@@ -78,7 +79,7 @@ class UnitController extends Controller
             $unit = Unit::find($id);
             $unit->update($request->all());
             \Session::flash('update_user','Updated Successfully!!');//Flashes Messages
-            return redirect('/home');
+            return redirect('/home/unit');
     }
 
     /**
@@ -93,6 +94,6 @@ class UnitController extends Controller
         $unit = Unit::find($id);
         $unit->delete();
         \Session::flash('deleted_user','Deleted successfully!!');//Flashes Messages
-        return redirect('/home');
+        return redirect('/home/unit');
     }
 }

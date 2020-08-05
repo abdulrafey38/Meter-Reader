@@ -106,7 +106,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 ">{{-- Month wise Units Charts --}}
-                    <div class="card bg-c-pink order-card">
+                    <div class="card bg-c-blue order-card">
                         <div class="card-block">
                             <br>
                             <h6 class="m-b-20">Units/Month</h6>
@@ -117,7 +117,7 @@
                 </div>
 
                 <div class="col-sm-6"> {{-- Year wise Ubits Chart --}}
-                    <div class="card bg-c-brown order-card">
+                    <div class="card bg-c-green order-card">
                         <div class="card-block">
                             <br>
                             <h6 class="m-b-20">Units/Year</h6>

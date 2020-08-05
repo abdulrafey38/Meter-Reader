@@ -10,7 +10,7 @@
     <style>
 
     body {
-        background-image: url('https://freepikpsd.com/wp-content/uploads/2019/10/effects-light-png-1-Transparent-Images.png');
+       
          /* Full height */
         height: 100%;
 
@@ -111,8 +111,8 @@
     <link rel="stylesheet" href="{{asset('vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css')}}">
     <link rel="stylesheet" href="{{asset('css/datepicker.css')}}">
     <link rel="stylesheet" href="{{asset('css/custom.css')}}">
-@yield('css')
-<!-- Font Awesome CSS-->
+    @yield('css')
+    <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
 
     <!-- Favicon-->
@@ -122,6 +122,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
 </head>
+
 <body>
 
 
@@ -137,8 +138,7 @@
             </div><!--profile card ends-->
             <ul class="nav-news-feed">
                 <li><i class="fa fa-home"></i><div><a href="{{route('home')}}">Dashboard</a></div></li>
-                    <li><i class="fa fa-home"></i><div><a href="{{route('unit.create')}}">Add Reading</a></div></li>
-                    <li><i class="fa fa-home"></i><div><a href="{{route('unit.index')}}">View Reading</a></div></li>
+                    <li><i class="fa fa-home"></i><div><a href="{{route('unit.index')}}">Manage Reading</a></div></li>
 
                     <li><i class = "fa fa-home"></i><a href=""
                         onclick="event.preventDefault();

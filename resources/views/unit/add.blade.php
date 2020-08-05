@@ -179,6 +179,11 @@
 
 
     <div class="form-group">
+        {!! Form::label('','Previous Units :') !!}
+        {!! Form::text('', $unit , ['class' => 'form-control alert-danger','disabled'=>'true']) !!}
+    </div>
+
+    <div class="form-group">
         {!! Form::label('date','Date:') !!}
         {!! Form::date('date', null , ['class' => 'form-control alert-danger']) !!}
     </div>
